@@ -1,0 +1,39 @@
+version: "3.0"
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: db
+    ports:
+      - "5432:5432" # Прокидання порту
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: hr_db
+    # volumes:
+    #   - djangodb:/var/lib/postgresql/data # Збереження даних у файловій системі
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "8000:80"
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+
+  django:
+    depends_on:
+      - postgres
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: /bin/sh -c "cd /departments && python manage.py migrate && python manage.py populate_db && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "3000:8000"
+    volumes:
+      - ./departments/:/departments
+
+volumes:
+  djangodb:

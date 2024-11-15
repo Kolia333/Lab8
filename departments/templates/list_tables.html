@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Таблиці</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Departments</h1>
+  <h1><i style="color:red">Іванчук Микола Ігорович КН21001б</i></h1>
+  <h1>Таблиці</h1>
+  <h2>Відділи</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Назва</th>
+        <th>Телефон</th>
+        <th>Номер кімнати</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for department in departments %}
+      <tr>
+        <td>{{ department.id }}</td>
+        <td>{{ department.name }}</td>
+        <td>{{ department.phone }}</td>
+        <td>{{ department.room_number }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Посади</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Назва</th>
+        <th>Оклад</th>
+        <th>Відсоток премії</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for position in positions %}
+      <tr>
+        <td>{{ position.id }}</td>
+        <td>{{ position.name }}</td>
+        <td>{{ position.salary }}</td>
+        <td>{{ position.bonus_percent }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Працівники</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Ім'я</th>
+        <th>Прізвище</th>
+        <th>По батькові</th>
+        <th>Адреса</th>
+        <th>Телефон</th>
+        <th>Освіта</th>
+        <th>Відділ</th>
+        <th>Посада</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for employee in employees %}
+      <tr>
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.first_name }}</td>
+        <td>{{ employee.last_name }}</td>
+        <td>{{ employee.middle_name }}</td>
+        <td>{{ employee.address }}</td>
+        <td>{{ employee.phone }}</td>
+        <td>{{ employee.education }}</td>
+        <td>{{ employee.department.name }}</td>
+        <td>{{ employee.position.name }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Проекти</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Назва</th>
+        <th>Термін виконання</th>
+        <th>Бюджет</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for project in projects %}
+      <tr>
+        <td>{{ project.id }}</td>
+        <td>{{ project.name }}</td>
+        <td>{{ project.deadline }}</td>
+        <td>{{ project.budget }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Виконання проектів</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Проект</th>
+        <th>Відділ</th>
+        <th>Дата початку</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for execution in executions %}
+      <tr>
+        <td>{{ execution.id }}</td>
+        <td>{{ execution.project.name }}</td>
+        <td>{{ execution.department.name }}</td>
+        <td>{{ execution.start_date }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+
+</html>
